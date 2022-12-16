@@ -4,7 +4,7 @@ import { Form, Button, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
-// import { savePaymentMethod } from '../actions/cartActions';
+import { savePaymentMethod } from '../actions/cartActions';
 
 function PaymentScreen() {
   const cart = useSelector((state) => state.cart);
@@ -22,7 +22,7 @@ function PaymentScreen() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(savePaymentMethod(paymentMethod))
+    dispatch(savePaymentMethod(paymentMethod))
     navigate("/placeorder");
   };
 
