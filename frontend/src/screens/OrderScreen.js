@@ -43,6 +43,8 @@ function OrderScreen() {
 
               <p>
                 <strong>Shipping: </strong>
+                <p><strong>Name: </strong>{order.user.name}</p>
+                <p><strong>Email: </strong><a href={`mailto:${order.user.email}`}>{order.user.email}</a></p>
                 {order.shippingAddress.address}, {order.shippingAddress.city},
                 {"  "}
                 {order.shippingAddress.postalCode},{"  "}
