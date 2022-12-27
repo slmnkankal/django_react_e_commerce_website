@@ -54,11 +54,15 @@ function OrderScreen() {
 
             <ListGroup.Item>
               <h2>Payment Method</h2>
-
               <p>
                 <strong>Method: </strong>
                 {order.paymentMethod}
               </p>
+              {order.isPaid ? (
+                <Message variant='success'>Paid on {order.paidAt}</Message>
+              ) : (
+                <Message variant='warning'>Not Paid</Message>
+              )}
             </ListGroup.Item>
 
             <ListGroup.Item>
