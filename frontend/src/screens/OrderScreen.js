@@ -20,6 +20,12 @@ function OrderScreen() {
     .reduce((acc, item) => acc + item.price * item.qty, 0)
     .toFixed(2);
 
+  useEffect(() => {
+    if (!order || order._id !== Number(orderId)) {
+      dispatch(getOrderDetails(orderId));
+    }
+  }, [order, orderId]);
+
   return (
     <div>
       <Row>
