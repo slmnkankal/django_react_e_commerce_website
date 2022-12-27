@@ -17,7 +17,7 @@ function OrderScreen() {
   const { order, error, loading } = orderDetails;
 
   if (!loading && !error) {
-    order.itemsPrice = order.cartItems
+    order.itemsPrice = order.orderItems
       .reduce((acc, item) => acc + item.price * item.qty, 0)
       .toFixed(2);
   }
@@ -38,10 +38,10 @@ function OrderScreen() {
 
               <p>
                 <strong>Shipping: </strong>
-                {cart.shippingAddress.address}, {cart.shippingAddress.city},
+                {order.shippingAddress.address}, {order.shippingAddress.city},
                 {"  "}
-                {cart.shippingAddress.postalCode},{"  "}
-                {cart.shippingAddress.country}
+                {order.shippingAddress.postalCode},{"  "}
+                {order.shippingAddress.country}
               </p>
             </ListGroup.Item>
 
@@ -50,17 +50,17 @@ function OrderScreen() {
 
               <p>
                 <strong>Method: </strong>
-                {cart.paymentMethod}
+                {order.paymentMethod}
               </p>
             </ListGroup.Item>
 
             <ListGroup.Item>
               <h2>Order Items</h2>
-              {cart.cartItems.lenght === 0 ? (
-                <Message variant="info">Your cart is empty</Message>
+              {order.orderItems.lenght === 0 ? (
+                <Message variant="info">Order is empty</Message>
               ) : (
                 <ListGroup variant="flush">
-                  {cart.cartItems.map((item, index) => (
+                  {order.orderItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
@@ -101,44 +101,29 @@ function OrderScreen() {
               <ListGroup.Item>
                 <Row>
                   <Col>Item:</Col>
-                  <Col>${cart.itemsPrice}</Col>
+                  <Col>${order.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping:</Col>
-                  <Col>${cart.shippingPrice}</Col>
+                  <Col>${order.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Tax:</Col>
-                  <Col>${cart.taxPrice}</Col>
+                  <Col>${order.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Total:</Col>
-                  <Col>${cart.totalPrice}</Col>
+                  <Col>${order.totalPrice}</Col>
                 </Row>
-              </ListGroup.Item>
-
-              <ListGroup.Item>
-                {error && <Message variant="danger">{error}</Message>}
-              </ListGroup.Item>
-
-              <ListGroup.Item>
-                <Button
-                  type="button"
-                  className="btn-block "
-                  disabled={cart.cartItems === 0}
-                  onClick={placeOrder}
-                >
-                  Place Order
-                </Button>
               </ListGroup.Item>
             </ListGroup>
           </Card>
