@@ -16,9 +16,11 @@ function OrderScreen() {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, error, loading } = orderDetails;
 
-  order.itemsPrice = order.cartItems
-    .reduce((acc, item) => acc + item.price * item.qty, 0)
-    .toFixed(2);
+  if (!loading && !error) {
+    order.itemsPrice = order.cartItems
+      .reduce((acc, item) => acc + item.price * item.qty, 0)
+      .toFixed(2);
+  }
 
   useEffect(() => {
     if (!order || order._id !== Number(orderId)) {
