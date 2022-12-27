@@ -40,7 +40,6 @@ function OrderScreen() {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
-
               <p>
                 <strong>Shipping: </strong>
                 <p><strong>Name: </strong>{order.user.name}</p>
@@ -50,6 +49,11 @@ function OrderScreen() {
                 {order.shippingAddress.postalCode},{"  "}
                 {order.shippingAddress.country}
               </p>
+              {order.isDeliverd ? (
+                <Message variant='success'>Delivered on {order.deliveredAt}</Message>
+              ) : (
+                <Message variant='warning'>Not Delivered</Message>
+              )}
             </ListGroup.Item>
 
             <ListGroup.Item>
