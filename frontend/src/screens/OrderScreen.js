@@ -28,7 +28,11 @@ function OrderScreen() {
     }
   }, [order, orderId]);
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : error ? (
+    <Message variant="danger">{error}</Message>
+  ) : (
     <div>
       <Row>
         <Col md={8}>
