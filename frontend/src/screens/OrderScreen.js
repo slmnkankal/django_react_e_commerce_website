@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { PayPalButton } from 'react-paypal-button-v2';
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getOrderDetails, payOrder } from "../actions/orderActions";
@@ -159,13 +160,26 @@ function OrderScreen() {
                   <Col>${order.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
-
               <ListGroup.Item>
                 <Row>
                   <Col>Total:</Col>
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {!order.isPaid && (
+                  <ListGroup.Item>
+                    {loading && <Loader/>}
+
+                    {!sdkReady ? (
+                      <Loader />
+                    ) : (
+                      <PayPalButton
+                        amount={order.totalPrice}
+                        onSuccess={successPaymentHandler}
+                      />
+                    )}
+                  </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>
