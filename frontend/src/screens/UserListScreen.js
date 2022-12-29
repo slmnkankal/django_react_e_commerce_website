@@ -8,8 +8,19 @@ import Message from "../components/Message";
 import { listUsers } from '../actions/userActions';
 
 function UserListScreen() {
+
+    const dispatch = useDispatch()
+
+    const userList = useSelector(state => state.userList)
+    const { loading, error, users } = userList
+
+    useEffect(() => {
+        dispatch(listUsers())
+    }, [dispatch])
   return (
-    <div>UserListScreen</div>
+    <div>
+        <h1>Users</h1>
+    </div>
   )
 }
 
