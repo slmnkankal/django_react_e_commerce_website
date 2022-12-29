@@ -213,7 +213,7 @@ export const listUsers = () => async (dispatch, getState) => {
         } = getState()
 
         const { data } = await axios.get(
-            'api/users/',
+            '/api/users/',
             {
                 headers: {
                     Authorization: `Bearer ${userInfo.token}`,
