@@ -16,6 +16,11 @@ function UserListScreen() {
   useEffect(() => {
     dispatch(listUsers());
   }, [dispatch]);
+
+  const deleteHandler = (id) => {
+    console.log('DELETE:', id)
+  }
+
   return (
     <div>
       <h1>Users</h1>
@@ -56,7 +61,7 @@ function UserListScreen() {
                   </LinkContainer>
                 </td>
                 <td>
-                    <Button variant="light" className="btn-sm">
+                    <Button variant="light" className="btn-sm" onClick={() => deleteHandler(user._id)}>
                       <i className="fas fa-trash" style={{ color:'red' }}></i>
                     </Button>
                 </td>
