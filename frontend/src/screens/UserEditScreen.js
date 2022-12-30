@@ -1,43 +1,52 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
-import { getUserDetails } from "../actions/userActions";
+import { getUserDetails, updateUser } from "../actions/userActions";
+import { USER_UPDATE_RESET } from '../constants/userConstants'
 
 function UserEditScreen() {
   const { id } = useParams();
   const userId = id;
-  console.log('userId', userId)
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
   const dispatch = useDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
 
   const userDetails = useSelector(state => state.userDetails);
   const { error, loading, user } = userDetails;
-  console.log('userDetails:', userDetails)
-  console.log('user._id', user._id)
+
+  const userUpdate = useSelector(state => state.userUpdate);
+  const { error:errorUpdate, loading:loadingUpdate, success:successUpdate } = userUpdate;
 
   useEffect(() => {
-    if (!user.name || user.id !== Number(userId)) {
-      dispatch(getUserDetails(userId));
+
+    if (successUpdate) {
+      dispatch({ type:USER_UPDATE_RESET })
+      navigate('/admin/userlist')
     } else {
-      setName(user.name);
-      setEmail(user.email);
-      setIsAdmin(user.isAdmin);
+      if (!user.name || user.id !== Number(userId)) {
+        dispatch(getUserDetails(userId));
+      } else {
+        setName(user.name);
+        setEmail(user.email);
+        setIsAdmin(user.isAdmin);
+      }
     }
-  }, [user, userId]);
+
+  }, [user, userId, successUpdate, dispatch, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(updateUser({_id:user._id, name, email, isAdmin }))
   };
+
   return (
     <div>
       <Link to="/admin/userlist">Go Back</Link>
