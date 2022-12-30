@@ -15,26 +15,25 @@ function UserListScreen() {
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
-  const userLogin = useSelector(state => state.userLogin)
-  const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
-  const userDelete = useSelector(state => state.userDelete)
-  const { success:successDelete } = userDelete
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   useEffect(() => {
-    if(userInfo && userInfo.isAdmin){
+    if (userInfo && userInfo.isAdmin) {
       dispatch(listUsers());
     } else {
-      navigate('/login')
+      navigate("/login");
     }
   }, [dispatch, navigate, successDelete]);
 
   const deleteHandler = (id) => {
-
-    if(window.confirm('Are you sure you want to delete this user?')){
-      dispatch(deleteUser(id))
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      dispatch(deleteUser(id));
     }
-  }
+  };
 
   return (
     <div>
@@ -63,22 +62,26 @@ function UserListScreen() {
                 <td>{user.email}</td>
                 <td>
                   {user.isAdmin ? (
-                    <i className="fas fa-check" style={{ color: 'green' }}></i>
+                    <i className="fas fa-check" style={{ color: "green" }}></i>
                   ) : (
-                    <i className="fas fa-check" style={{ color: 'red'}}></i>
+                    <i className="fas fa-check" style={{ color: "red" }}></i>
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/admin/user/${user._id}`}>
+                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <Button variant="light" className="btn-sm">
-                      <i className="fas fa-edit" style={{ color:'orange' }}></i>
+                      <i className="fas fa-edit"></i>
                     </Button>
                   </LinkContainer>
                 </td>
                 <td>
-                    <Button variant="light" className="btn-sm" onClick={() => deleteHandler(user._id)}>
-                      <i className="fas fa-trash" style={{ color:'red' }}></i>
-                    </Button>
+                  <Button
+                    variant="light"
+                    className="btn-sm"
+                    onClick={() => deleteHandler(user._id)}
+                  >
+                    <i className="fas fa-trash" style={{ color: "red" }}></i>
+                  </Button>
                 </td>
               </tr>
             ))}
