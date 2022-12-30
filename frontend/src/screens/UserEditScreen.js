@@ -10,6 +10,7 @@ import { getUserDetails } from "../actions/userActions";
 function UserEditScreen() {
   const { id } = useParams();
   const userId = id;
+  console.log('userId', userId)
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,10 +20,20 @@ function UserEditScreen() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const userDetails = useSelector((state) => state.userDetails);
+  const userDetails = useSelector(state => state.userDetails);
   const { error, loading, user } = userDetails;
+  console.log('userDetails:', userDetails)
+  console.log('user._id', user._id)
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!user.name || user.id !== Number(userId)) {
+      dispatch(getUserDetails(userId));
+    } else {
+      setName(user.name);
+      setEmail(user.email);
+      setIsAdmin(user.isAdmin);
+    }
+  }, [user, userId]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -59,13 +70,13 @@ function UserEditScreen() {
             </Form.Group>
 
             <Form.Group controlId="isadmin">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="chekbox"
+              <Form.Label>Is Admin</Form.Label>
+              <Form.Check
+                type="checkbox"
                 label="Is Admin"
                 checked={isAdmin}
                 onChange={(e) => setIsAdmin(e.target.checked)}
-              ></Form.Control>
+              ></Form.Check>
             </Form.Group>
 
             <Button type="submit" variant="primary">
