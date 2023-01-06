@@ -26,7 +26,8 @@ import {
 
  } from '../constants/productConstants';
 
- export const listProducts = (keyword='' ) => async (dispatch) => {
+ export const listProducts = (keyword='') => async (dispatch) => {
+
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
 
