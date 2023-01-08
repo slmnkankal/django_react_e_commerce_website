@@ -7,6 +7,7 @@ import Product from "../components/Product";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
+import ProductCarousel from "../components/ProductCarousel";
 import { listProducts } from "../actions/productActions";
 
 const HomeScreen = () => {
@@ -24,6 +25,8 @@ const HomeScreen = () => {
 
   return (
     <div>
+      {!keyword && <ProductCarousel />}
+      
       <h1>Latest Products</h1>
       {loading ? (
         <Loader />
@@ -38,7 +41,7 @@ const HomeScreen = () => {
               </Col>
             ))}
           </Row>
-          <Paginate page={page} pages={pages} keyword={keyword}/>
+          <Paginate page={page} pages={pages} keyword={keyword} />
         </div>
       )}
     </div>
