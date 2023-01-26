@@ -63,7 +63,7 @@ function OrderScreen() {
       if (!window.paypal) {
         addPayPalScript();
       } else {
-        sdkReady(true);
+        setSdkReady(true);
       }
     }
   }, [dispatch, order, orderId, successPay, successDeliver]);
@@ -218,7 +218,7 @@ function OrderScreen() {
                   className="btn btn-block"
                   onClick={deliverHandler}
                 >
-                  Mark As Deliver
+                  Mark As Delivered
                 </Button>
               </ListGroup.Item>
             )}
