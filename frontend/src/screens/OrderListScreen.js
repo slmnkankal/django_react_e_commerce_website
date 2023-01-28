@@ -58,7 +58,7 @@ function OrderListScreen() {
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className="fas fa-check" style={{ color: "red" }}></i>
+                    <i className="fas fa-times" style={{ color: "orange" }}></i>
                   )}
                 </td>
 
@@ -66,7 +66,7 @@ function OrderListScreen() {
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <i className="fas fa-check" style={{ color: "red" }}></i>
+                    <i className="fas fa-times" style={{ color: "orange" }}></i>
                   )}
                 </td>
 
