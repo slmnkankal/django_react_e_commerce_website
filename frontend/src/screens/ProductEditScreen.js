@@ -195,7 +195,6 @@ function ProductEditScreen() {
             </Button>
           </Form>
         )}
-        ;
       </FormContainer>
     </div>
   );
