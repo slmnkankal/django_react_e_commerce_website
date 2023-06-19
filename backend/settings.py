@@ -133,11 +133,11 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "ecommerce",
-        "USER": "ecommerce",
-        "PASSWORD": "postgres",
-        "HOST": "ecommerce-identifier.c0r7frtcdfdu.eu-north-1.rds.amazonaws.com",
-        "PORT": "5432"
+        "NAME": config("SQL_DATABASE"),
+        "USER": config("SQL_USER"),
+        "PASSWORD": config("SQL_PASSWORD"),
+        "HOST": config("SQL_HOST"),
+        "PORT": config("SQL_PORT")
 
     }
 }
