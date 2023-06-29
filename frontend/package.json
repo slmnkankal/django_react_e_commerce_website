@@ -42,3 +42,24 @@
     ]
   }
 }
+
+{
+    "name": "django_react_e_commerce_website",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "build": "echo \"No build specified\" && exit 1",
+        "test": "echo \"No test specified\" && exit 1",
+        "start": "node index.js"
+      },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/slmnkankal/django_react_e_commerce_website.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/slmnkankal/django_react_e_commerce_website/issues"
+    },
+    "homepage": "https://github.com/slmnkankal/django_react_e_commerce_website#readme"
+}
